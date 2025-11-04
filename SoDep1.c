@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <string.h>
+
+int ResolveTheIncident(char Reimu[]){
+    int Seal = strlen(Reimu);
+    for (int Amulet = 0; Amulet <= (Seal - 1) / 2; Amulet++){
+        if (Reimu[Amulet] != Reimu[Seal - Amulet - 1] || (Reimu[Amulet] - '0') % 2 == 1){
+            return 0;
+        }
+    }
+    return 1;
+
+}
+
+int main(){
+    int fairy;
+    scanf("%d", &fairy);
+    while (fairy--){
+        char Reimu[1000];
+        scanf("%s", &Reimu);
+        if (ResolveTheIncident(Reimu)){
+            printf("YES\n");
+        } else {
+            printf("NO\n");
+        }
+    }
+}
