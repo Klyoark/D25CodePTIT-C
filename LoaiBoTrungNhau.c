@@ -10,8 +10,7 @@ int main(){
         if (!Rinnosuke[Reimu[Seal]]){
             Rinnosuke[Reimu[Seal]]++;
             if (Rinnosuke[Reimu[Seal]]){
-                Marisa[Spark] = Reimu[Seal];
-                Spark++;
+                Marisa[Spark++] = Reimu[Seal];
             }
                 
         }
