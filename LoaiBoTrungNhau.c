@@ -1,24 +1,20 @@
 #include <stdio.h>
 int main(){
-    int Amulet;
-    scanf("%d", &Amulet);
-    int Reimu[Amulet];
-    int Rinnosuke[100005] = {};
-    int Marisa[Amulet], Spark = 0;
-    for (int Seal = 0; Seal < Amulet; Seal++){
-        scanf("%d", &Reimu[Seal]);
-        if (!Rinnosuke[Reimu[Seal]]){
-            Rinnosuke[Reimu[Seal]]++;
-            if (Rinnosuke[Reimu[Seal]]){
-                Marisa[Spark++] = Reimu[Seal];
+    int n;
+    scanf("%d", &n);
+    int a[n];
+    int freq[100005] = {};
+    int b[n], count = 0;
+    for (int i = 0; i < n; i++){
+        scanf("%d", &a[i]);
+        if (!freq[a[i]]){
+            freq[a[i]]++;
+            if (freq[a[i]]){
+                b[count++] = a[i];
             }
-                
         }
     }
-    for (int MASTASPARKU = 0; MASTASPARKU < Spark; MASTASPARKU++){
-        printf("%d ", Marisa[MASTASPARKU]);
+    for (int i = 0; i < count; i++){
+        printf("%d ", b[i]);
     }
-
-
-
 }
