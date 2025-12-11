@@ -1,37 +1,32 @@
 #include <stdio.h>
 
-int Number_of_Spellcards;
+int N;
+char a[25];
 
-void ResolveTheIncident(int Talisman, int Items, char Reimu[]){
-    
-    if (Talisman == Number_of_Spellcards) {
-        Reimu[Talisman] = '\0';
-        printf("%s ", Reimu);
+void backtrack(int pos, int min) {
+    if (pos == N) {
+        for (int i = 0; i < N; i++) {
+            printf("%d", a[i]);
+        }
+        printf(" ");
         return;
     }
 
-    for (int currentItem = Items; currentItem <= 9; currentItem++) {
-        Reimu[Talisman] = currentItem + '0';
-        ResolveTheIncident(Talisman + 1, currentItem, Reimu);
+    for (int digit = min; digit <= 9; digit++) {
+        a[pos] = digit;
+        backtrack(pos + 1, digit);
     }
 }
 
-int main(){
-
-    int fairy;
-    scanf("%d", &fairy);
-    while (fairy--){
-
-        scanf("%d", &Number_of_Spellcards);
-        char Reimu[16];
-
-        for (int Items = 1; Items <= 9; Items++){
-            Reimu[0] = Items + '0';
-            ResolveTheIncident(1, Items, Reimu);
-
+int main() {
+    int t;
+    scanf("%d", &t);
+    while (t--) {
+        scanf("%d", &N);
+        for (int first = 1; first <= 9; first++) {
+            a[0] = first;
+            backtrack(1, first);
         }
         printf("\n");
-
     }
 }
-
