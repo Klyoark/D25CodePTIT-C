@@ -1,30 +1,27 @@
 #include <stdio.h>
+#include <stdlib.h>
+
+int cmp(const void* a, const void* b) {
+    return (*(int*)a > *(int*)b) - (*(int*)a < *(int*)b);
+}
 
 int main() {
-    int N;
-    scanf("%d", &N);
-    int A[105], W[105];
-    for (int i = 0; i < N; i++) {
-        scanf("%d %d", &A[i], &W[i]);
+    int n;
+    scanf("%d", &n);
+    int T[n], D[n];
+    for (int i = 0; i < n; i++) {
+        scanf("%d %d", &T[i], &D[i]);
     }
+    qsort(T, n, sizeof(int), cmp);
+    qsort(D, n, sizeof(int), cmp);
 
-    for (int i = 0; i < N - 1; i++) {
-        for (int j = i + 1; j < N; j++) {
-            if (A[i] > A[j]) {
-                int tmp = A[i]; A[i] = A[j]; A[j] = tmp;
-                tmp = W[i]; W[i] = W[j]; W[j] = tmp;
-            }
+    int clock = 0;
+    for (int i = 0; i < n; i++) {
+        if (T[i] > clock) {
+            clock = T[i];
         }
+        clock += D[i];
     }
 
-    long long cur_t = 0;
-    for (int i = 0; i < N; i++) {
-        if (A[i] > cur_t) {
-            cur_t = A[i];
-        }
-        cur_t += W[i];
-    }
-
-    printf("%lld\n", cur_t);
-    return 0;
+    printf("%d", clock);
 }

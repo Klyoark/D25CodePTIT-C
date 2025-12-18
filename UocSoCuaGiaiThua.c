@@ -9,8 +9,9 @@ int main(){
     while (fairy--) {
         scanf("%d %d", &Cirno, &StageBoss);
         int Score = 0;
-        for (long long Ice = StageBoss; Ice <= Cirno; Ice *= StageBoss) {
-            Score += Cirno / Ice;
+        while (Cirno > 0) {
+            Cirno /= StageBoss;
+            Score += Cirno;
         }
         printf("%d\n", Score);
     }

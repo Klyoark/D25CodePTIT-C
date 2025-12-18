@@ -2,6 +2,16 @@
 #include <string.h>
 #include <stdlib.h>
 
+void getWord(char S[], char word[][203], int* w) {
+    char* parts = strtok(S, " ");
+    int count = 0;
+    while (parts != NULL) {
+        strcpy(word[count++], parts);
+        parts = strtok(NULL, " ");
+    }
+    *w = count;
+}
+
 int in_list(char* cur_word, char list[][203], int cur_size){
     for (int i = 0; i < cur_size; i++) {
         if (strcmp(cur_word, list[i]) == 0) {
@@ -12,7 +22,7 @@ int in_list(char* cur_word, char list[][203], int cur_size){
 }
 
 int cmp(const void* a, const void* b) {
-    return strcmp((char*)a, (char*)b);
+    return strcmp((const char*)a, (const char*)b);
 }
 
 int main() {
@@ -28,17 +38,8 @@ int main() {
         char Words1[203][203], Words2[203][203];
         int w1 = 0, w2 = 0;
 
-        char* parts = strtok(S1, " ");
-        while (parts != NULL) {
-            strcpy(Words1[w1++], parts);
-            parts = strtok(NULL, " ");
-        }
-
-        parts = strtok(S2, " ");
-        while (parts != NULL) {
-            strcpy(Words2[w2++], parts);
-            parts = strtok(NULL, " ");
-        }
+        getWord(S1, Words1, &w1);
+        getWord(S2, Words2, &w2);
 
         char res[203][203];
         int wr = 0;

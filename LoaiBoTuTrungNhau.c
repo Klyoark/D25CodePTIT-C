@@ -1,29 +1,33 @@
 #include <stdio.h>
 #include <string.h>
 
-int main(){
-    char Reimu[101];
-    char Result[100][101];
-    int Money = 0;
 
-    fgets(Reimu, sizeof(Reimu), stdin);
-    Reimu[strcspn(Reimu, "\n")] = '\0';
 
-    char *StageBoss = strtok(Reimu, " ");
-    while (StageBoss != NULL) {
-        int Exterminated = 0;
-        for (int Amulet = 0; Amulet < Money; Amulet++){
-            if (strcmp(Result[Amulet], StageBoss) == 0){
-                Exterminated = 1;
-                break;
-            }
-        }
-        if (!Exterminated){
-            strcpy(Result[Money++], StageBoss);
-        }
-        StageBoss = strtok(NULL, " ");
-    }
-    for (int Amulet = 0; Amulet < Money; Amulet++){
-        printf("%s ", Result[Amulet]);
-    }
+int main() {
+	char a[1001];
+	char b[1001][1001];
+	int count = 0;
+	fgets(a, 10001, stdin);
+	a[strcspn(a, "\n")] = '\0';
+	char* parts = strtok(a, " ");
+
+	while (parts != NULL) {
+		int dupe = 0;
+		for (int i = 0; i < count; i++) {
+			if (strcmp(b[i], parts) == 0) {
+				dupe = 1;
+				break;
+			}
+		}
+
+		if (!dupe) {
+			strcpy(b[count++], parts);
+		}
+		
+		parts = strtok(NULL, " ");
+	}
+
+	for (int i = 0; i < count; i++) {
+		printf("%s ", b[i]);
+	}
 }
