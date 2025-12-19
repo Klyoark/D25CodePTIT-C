@@ -1,27 +1,23 @@
 #include <stdio.h>
 
+int memo[10001] = {0};
 
-long long Marisa[10000];
-
-long long ResolveTheIncident(int Reimu){
-
-    if (Reimu <= 2){
-        return 1;
+int NthFib(int n) {
+    if (n <= 1) {
+        return n;
     }
-    if (Marisa[Reimu]){
-        return Marisa[Reimu];
+    if (memo[n]) {
+        return memo[n];
     }
-    Marisa[Reimu] = ResolveTheIncident(Reimu - 1) + ResolveTheIncident(Reimu - 2);
-    return Marisa[Reimu];
-
+    return NthFib(n - 1) + NthFib(n - 2);
 }
 
-int main(){
-    int fairy;
-    scanf("%d", &fairy);
-    while(fairy--){
-        int Reimu;
-        scanf("%d", &Reimu);
-        printf("%lld\n", ResolveTheIncident(Reimu));
+int main() {
+    int t;
+    scanf("%d", &t);
+    while (t--) {
+        int n;
+        scanf("%d", &n);
+        printf("%d\n", NthFib(n));
     }
 }

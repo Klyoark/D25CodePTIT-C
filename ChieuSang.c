@@ -15,7 +15,6 @@ int main() {
     int Lbound = 0;
     int Rbound = 0;
 
-    //cur lit
     for (int i = 0; i < base_light; i++) {
         Lbound = pos[i] - lit_range;
         Rbound = pos[i] + lit_range;
