@@ -1,43 +1,44 @@
 #include <stdio.h>
 #include <string.h>
 
-void swap(char* A, char* B) {
-    char tmp[1005];
-    strcpy(tmp, A);
-    strcpy(A, B);
-    strcpy(B, tmp);
+void swap (char* a, char* b) {
+    char tmp[105];
+    strcpy(tmp, a);
+    strcpy(a, b);
+    strcpy(b, tmp);
 }
 
 int main() {
     int t;
     scanf("%d\n", &t);
     while (t--) {
-        char A[1005];
-        char B[1005];
-        fgets(A, 1005, stdin);
-        fgets(B, 1005, stdin);
-        A[strcspn(A, "\n")] = '\0';
-        B[strcspn(B, "\n")] = '\0';
+        char a[105];
+        char b[105];
 
-        int lenA = strlen(A);
-        int lenB = strlen(B);
+        fgets(a, 105, stdin);
+        fgets(b, 105, stdin);
+        a[strcspn(a, "\n")] = '\0';
+        b[strcspn(b, "\n")] = '\0';
 
-        if ( lenA < lenB || (lenA == lenB && strcmp(A, B) < 0) ) {
-            swap(A, B);
-            lenA = strlen(A);
-            lenB = strlen(B);
+        int lena = strlen(a) - 1;
+        int lenb = strlen(b) - 1;
+        if (lena - lenb < 0 || (lena == lenb && strcmp(a, b) < 0)) {
+            swap(a, b);
+            lena = strlen(a) - 1;
+            lenb = strlen(b) - 1;
         }
 
-        char reversed_res[1005], res[1005];
+        char revres[105] = {0};
         int rr = 0;
+        char res[105] = {0};
+        int k = 0;
+        
         int borrow = 0;
-        int cs = 0;
-
-        for (int i = lenA - 1, j = lenB - 1; i >= 0; i--, j--) {
-            int ia = A[i] - '0';
-            int jb = (j >= 0) ? B[j] - '0' : 0;
-
-            cs = ia - jb - borrow;
+        int ia, jb, cs;
+        for (int i = lena, j = lenb; i >= 0; i--, j--) {
+            ia = a[i] - '0';
+            jb = (j >= 0) ? b[j] - '0' : 0;
+            cs = (ia - borrow) - jb;
 
             if (cs < 0) {
                 cs += 10;
@@ -46,15 +47,15 @@ int main() {
                 borrow = 0;
             }
 
-            reversed_res[rr++] = cs + '0';
+            revres[rr++] = cs + '0';
         }
 
-        while (rr > 1 && reversed_res[rr - 1] == '0') {
+        while (rr > 1 && revres[rr - 1] == '0') {
             rr--;
         }
 
         for (int i = 0; i < rr; i++) {
-            res[i] = reversed_res[rr - i - 1];
+            res[i] = revres[rr - 1 - i];
         }
         res[rr] = '\0';
         printf("%s\n", res);

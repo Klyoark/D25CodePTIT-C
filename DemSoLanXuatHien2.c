@@ -5,26 +5,31 @@ int main(){
     int fairy;
     scanf("%d", &fairy);
     for (int Bullet = 1; Bullet <= fairy; Bullet++){
-        int Knife;
-        scanf("%d", &Knife);
-        int Sakuya[Knife], Maid[100001] = {}, Meiling[Knife], Rainbow = 0;
-
-        for (int Servant = 0; Servant < Knife; Servant++){
-            scanf("%d", &Sakuya[Servant]);
-            Maid[Sakuya[Servant]]++;
-            if (Maid[Sakuya[Servant]] == 1){
-                Meiling[Rainbow] = Sakuya[Servant];
-                Rainbow++;
+        int n;
+        scanf("%d", &n);
+        int a[n];
+        int b[100001] = {0};
+        for (int i = 0; i < n; i++) {
+            scanf("%d", &a[i]);
+        }
+        for (int i = 0; i < n; i++) {
+            if (b[i] == 0) {
+                b[i] = 1;
+                for (int j = i + 1; j < n; j++) {
+                    if (a[i] == a[j]) {
+                        b[j] = -1;
+                        b[i]++;
+                    }
+                }
             }
         }
 
         printf("Test %d:\n", Bullet);
-
-        for (int Servant = 0; Servant < Rainbow; Servant++){
-            printf("%d xuat hien %d lan\n", Meiling[Servant], Maid[Meiling[Servant]]);
-            Maid[Meiling[Servant]] == 0;
+        for (int i = 0; i < n; i++) {
+            if (b[i] != -1) {
+                printf("%d xuat hien %d lan\n", a[i], b[i]);
+            }
         }
-
     }
 
 }

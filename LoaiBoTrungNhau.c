@@ -3,18 +3,18 @@ int main(){
     int n;
     scanf("%d", &n);
     int a[n];
-    int freq[100005] = {};
-    int b[n], count = 0;
-    for (int i = 0; i < n; i++){
+    int b[100005] = {0};
+    int c[n];
+    int d = 0;
+
+    for (int i = 0; i < n; i++) {
         scanf("%d", &a[i]);
-        if (!freq[a[i]]){
-            freq[a[i]]++;
-            if (freq[a[i]]){
-                b[count++] = a[i];
-            }
+        if (!b[a[i]]) {
+            b[a[i]]++;
+            c[d++] = a[i];
         }
     }
-    for (int i = 0; i < count; i++){
-        printf("%d ", b[i]);
+    for (int i = 0; i < d; i++) {
+        printf("%d ", c[i]);
     }
 }

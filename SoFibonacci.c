@@ -1,15 +1,16 @@
 #include <stdio.h>
 
-int memo[10001] = {0};
+long long memo[10001] = {0};
 
-int NthFib(int n) {
+long long NthFib(long long n) {
     if (n <= 1) {
         return n;
     }
     if (memo[n]) {
         return memo[n];
     }
-    return NthFib(n - 1) + NthFib(n - 2);
+    memo[n] = NthFib(n - 1) + NthFib(n - 2);
+    return memo[n];
 }
 
 int main() {

@@ -4,24 +4,26 @@ int main(){
     int fairy;
     scanf("%d", &fairy);
     while (fairy--){
-        int Amulet;
-        scanf("%d", &Amulet);
-        int Reimu[Amulet];
-        for (int Seal = 0; Seal < Amulet; Seal++){
-            scanf("%d", &Reimu[Seal]);
+        int n;
+        scanf("%d", &n);
+        int a[n];
+        int b[n];
+        int c = 0;
+
+        for (int i = 0; i < n; i++) {
+            scanf("%d", &a[i]);
         }
 
-        int Rinnosuke[Amulet], Counter = 0;
-        int Talisman = -1;
-        for (int Seal = Amulet - 1; Seal >= 0; Seal--){
-            if (Reimu[Seal] > Talisman){
-                Talisman = Reimu[Seal];
-                Rinnosuke[Counter++] = Reimu[Seal];
+        int min = -1;
+        for (int i = n - 1; i >= 0; i--) {
+            if (a[i] > min) {
+                min = a[i];
+                b[c++] = a[i];
             }
         }
-        for (int Items = Counter - 1; Items >= 0; Items--){
-            printf("%d ", Rinnosuke[Items]);
+
+        for (int i = c - 1; i >= 0; i--) {
+            printf("%d ", b[i]);
         }
-        printf("\n");
     }
 }

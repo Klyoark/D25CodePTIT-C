@@ -1,25 +1,22 @@
 #include <stdio.h>
 
 int main(){
+    int n;
+    scanf("%d", &n);
+    int a[n];
+    int b[100001] = {0};
+    int c[n];
+    int d = 0;
 
-        
-    int Knife;
-    scanf("%d", &Knife);
-    int Sakuya[Knife], Maid[100001] = {}, Meiling[Knife], Rainbow = 0;
-
-    for (int Servant = 0; Servant < Knife; Servant++){
-        scanf("%d", &Sakuya[Servant]);
-        Maid[Sakuya[Servant]]++;
-        if (Maid[Sakuya[Servant]] == 1){
-            Meiling[Rainbow] = Sakuya[Servant];
-            Rainbow++;
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &a[i]);
+        b[a[i]]++;
+        if (b[a[i]] == 1) {
+            c[d++] = a[i];
         }
     }
 
-    for (int Servant = 0; Servant < Rainbow; Servant++){
-        printf("%d %d\n", Meiling[Servant], Maid[Meiling[Servant]]);
+    for (int i = 0; i < d; i++) {
+        printf("%d %d\n", c[i], b[c[i]]);
     }
-
-
-
 }

@@ -1,59 +1,58 @@
 #include <stdio.h>
 
 int main() {
-    int t;
-    scanf("%d", &t);
-    for (int k = 1; k <= t; k++) {
-        int m, n;
-        scanf("%d %d", &m, &n);
-        int a[m][n], cot[n], hang[m];
 
-        for (int i = 0; i < m; i++) {
-            hang[i] = 0;
-        }
+	int o;
+	scanf("%d", &o);
+	for (int t = 1; t <= o; t++) {
+		int m, n;
+		scanf("%d %d", &m, &n);
+		int a[m][n];
+		
+		for (int i = 0; i < m; i++) {
+			for (int j = 0; j < n; j++) {
+				scanf("%d", &a[i][j]);
+			}
+		}
+		
+		int maxr_idx = -1, maxr_val = -1;
+		int maxc_idx = -1, maxc_val = -1;
 
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                scanf("%d", &a[i][j]);
-                hang[i] += a[i][j];
-            }
-        }
+		int temps = 0;
+		for (int i = 0; i < m; i++) {
+			for (int j = 0; j < n; j++) {
+				temps += a[i][j];
+			}
+			if (temps > maxr_val) {
+				maxr_val = temps;
+				maxr_idx = i;
+			}
+			temps = 0;
+		}
 
-        int mh_idx = 0;
-        for (int i = 0; i < m; i++) {
-            if (hang[i] > hang[mh_idx]) {
-                mh_idx = i;
-            }
-        }
+		temps = 0;
+		for (int j = 0; j < n; j++) {
+			for (int i = 0; i < m; i++) {
+				if (i != maxr_idx) {
+					temps += a[i][j];
+				}
+			}
+			if (temps > maxc_val) {
+				maxc_val = temps;
+				maxc_idx = j;
+			}
+			temps = 0;
+		}
 
-        for (int j = 0; j < n; j++) {
-            cot[j] = 0;
-            for (int i = 0; i < m; i++) {
-                if (i != mh_idx) {
-                    cot[j] += a[i][j];
-                }
-            }
-        }
-
-        int mc_idx = 0;
-        for (int j = 1; j < n; j++) {
-            if (cot[j] > cot[mc_idx]) {
-                mc_idx = j;
-            }
-        }
-
-        printf("Test %d:\n", k);
-        for (int i = 0; i < m; i++) {
-            if (i == mh_idx) {
-                continue;
-            }
-            for (int j = 0; j < n; j++) {
-                if (j == mc_idx) {
-                    continue;
-                }
-                printf("%d ", a[i][j]);
-            }
-            printf("\n");
-        }
-    }
+        printf("Test %d:\n", t);
+		for (int i = 0; i < m; i++) {
+			for (int j = 0; j < n; j++) {
+				if (i != maxr_idx && j != maxc_idx) {
+					printf("%d ", a[i][j]);
+				}
+			}
+			printf("\n");
+		}
+	}
+	
 }

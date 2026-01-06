@@ -3,7 +3,7 @@
 
 int thuanNghich(char* word) {
     int len = strlen(word);
-    for (int i = 0; i < (len - 1) / 2; i++) {
+    for (int i = 0; i < len / 2; i++) {
         if (word[i] != word[len - i - 1]) {
             return 0;
         }

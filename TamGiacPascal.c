@@ -1,32 +1,23 @@
-//Tam Giac Pascal (n,k) = n!/k!(n-k)!
-
 #include <stdio.h>
-#include <math.h>
-int Reimu;
-void ResolveTheIncident(int Talisman[], int Seal[]){
-    for (int Donation = 1; Donation <= Reimu; Donation++){
-        int Shrine = Talisman[Donation];
-        Talisman[Donation] = Seal[Donation];
-        Seal[Donation] = Shrine;
+
+int main() {
+    int n;
+    scanf("%d", &n);
+
+    int a[n + 1];
+    for (int i = 0; i < n + 1; i++) {
+        a[i] = 0;
     }
-}
+    a[0] = 1;
 
-int main(){
-    scanf("%d", &Reimu);
-
-    int Talisman[Reimu + 2];
-    int Seal [Reimu + 2];
-    Talisman[0] = 0;
-    Talisman[1] = 1;
-    
-    for (int Spark = 2; Spark <= Reimu + 1; Spark++) {
-        for (int Furnace = 1; Furnace < Spark; Furnace++){
-            Seal[Furnace] = Talisman[Furnace] + Talisman[Furnace - 1];
-            printf("%d ", Talisman[Furnace]);
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < i + 1; j++) {
+            printf("%d " , a[j]);
         }
-        Seal[Spark] = 1;
         printf("\n");
-        ResolveTheIncident(Talisman, Seal);
+
+        for (int j = i + 1; j > 0; j--) {
+            a[j] = a[j] + a[j - 1];
+        }
     }
 }
-     

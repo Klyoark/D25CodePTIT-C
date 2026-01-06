@@ -3,40 +3,41 @@
 int main() {
     int t;
     scanf("%d", &t);
-    for (int k = 1; k <= t; k++) {
 
+    for (int tc = 1; tc <= t; tc++) {
         int n;
         scanf("%d", &n);
-        int a[n + 1], c[n + 1], b[n + 1][n + 1];
-        a[0] = 1000;
-        int cur_seq = 0, cur_len = 1, max_len = 0;
 
-        for (int i = 1; i <= n; i++) {
+        int a[n];
+        for (int i = 0; i < n; i++) {
             scanf("%d", &a[i]);
+        }
 
-            if (a[i] <= a[i - 1]) {
-                c[cur_seq] = cur_len;
-                cur_len = 1;
-                cur_seq++;
-            }
-            
-            b[cur_seq][cur_len++] = a[i];  
-            if (cur_len > max_len) {
-                max_len = cur_len;
+        int maxLen = 1, start = 0;
+
+        // Pass 1: find max length
+        for (int i = 1; i < n; i++) {
+            if (i == n || a[i] <= a[i - 1]) {
+                if (i - start > maxLen)
+                    maxLen = i - start;
+                start = i;
             }
         }
 
-        c[cur_seq] = cur_len;
-        printf("Test %d:\n%d\n", k, max_len - 1);
+        printf("Test %d:\n%d\n", tc, maxLen);
 
-        for (int i = 1; i <= cur_seq; i++) {
-            if (c[i] == max_len) {
-                for (int j = 1; j < c[i]; j++) {
-                    printf("%d ", b[i][j]);
+        // Pass 2: print all max segments
+        start = 0;
+        for (int i = 1; i <= n; i++) {
+            if (i == n || a[i] <= a[i - 1]) {
+                if (i - start == maxLen) {
+                    for (int j = start; j < i; j++)
+                        printf("%d ", a[j]);
+                    printf("\n");
                 }
-                printf("\n");
+                start = i;
             }
         }
     }
+    return 0;
 }
-
